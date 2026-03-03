@@ -26,6 +26,7 @@ export function useGtfs() {
         const instance = await GtfsSqlJs.fromZip(GTFS_URL, {
           skipFiles: ['shapes.txt'],
           onProgress: (p) => setProgress(p),
+          locateFile: (file: string) => `${import.meta.env.BASE_URL}${file}`,
         });
         setGtfs(instance);
       } catch (err) {

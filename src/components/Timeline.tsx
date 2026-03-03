@@ -106,19 +106,13 @@ export function Timeline({
 
     // Calculate connections
     const conns: Connection[] = [];
-    const connectedArrivals = new Set<number>();
-    const connectedDepartures = new Set<number>();
 
-    for (let ai = 0; ai < uniqueArrivals.length; ai++) {
-      const arr = uniqueArrivals[ai];
-      for (let di = 0; di < uniqueDepartures.length; di++) {
-        const dep = uniqueDepartures[di];
+    for (const arr of uniqueArrivals) {
+      for (const dep of uniqueDepartures) {
         const diff = dep.time - arr.time;
         if (diff >= 0 && diff <= goodInterval) {
           const quality = diff < badInterval ? 'bad' : 'good';
           conns.push({ arrival: arr, departure: dep, diff, quality });
-          connectedArrivals.add(ai);
-          connectedDepartures.add(di);
         }
       }
     }
@@ -165,9 +159,9 @@ export function Timeline({
       ? arrivalConnections.get(key)
       : departureConnections.get(key);
     if (!conns || conns.length === 0) return '';
-    // If any connection is bad, mark as bad
-    if (conns.some((c) => c.quality === 'bad')) return 'connection-bad';
-    return 'connection-good';
+    // If any connection is good, mark as good (user can take the comfortable transfer)
+    if (conns.some((c) => c.quality === 'good')) return 'connection-good';
+    return 'connection-bad';
   }
 
   const TIMELINE_HEIGHT = Math.max(600, allEvents.length * 25);
