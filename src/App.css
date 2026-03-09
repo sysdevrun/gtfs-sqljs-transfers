@@ -354,7 +354,6 @@ input[type="range"] {
 
 .timeline-svg {
   width: 100%;
-  max-height: 80vh;
 }
 
 .timeline-legend {

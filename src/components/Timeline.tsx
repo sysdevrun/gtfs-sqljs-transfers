@@ -179,7 +179,7 @@ export function Timeline({
         <span style={{ color: arrivalColor }}>Arrivées ({arrivalStopName})</span>
         <span style={{ color: departureColor }}>Départs ({departureStopName})</span>
       </div>
-      <svg className="timeline-svg" viewBox={`0 0 400 ${TIMELINE_HEIGHT}`} preserveAspectRatio="xMidYMid meet">
+      <svg className="timeline-svg" viewBox={`0 0 400 ${TIMELINE_HEIGHT}`} style={{ height: TIMELINE_HEIGHT }}>
         {/* Center axis */}
         <line x1="200" y1={PADDING} x2="200" y2={TIMELINE_HEIGHT - PADDING} stroke="#ddd" strokeWidth="2" />
 
