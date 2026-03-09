@@ -137,6 +137,11 @@ function App() {
           departureColor={departureColor}
         />
       )}
+
+      <footer className="app-footer">
+        <span>Conçu par <a href="https://www.sys-dev-run.fr/" target="_blank" rel="noopener noreferrer">SysDevRun</a></span>
+        <span>npm module : <a href="https://www.npmjs.com/package/gtfs-sqljs" target="_blank" rel="noopener noreferrer">gtfs-sqljs</a></span>
+      </footer>
     </div>
   );
 }
