@@ -63,6 +63,92 @@
   font-size: 1rem;
 }
 
+/* Inline Loading */
+.loading-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.loading-inline .loading-bar-container {
+  width: 100%;
+  max-width: 250px;
+}
+
+/* Feed info & change button */
+.feed-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  background: #f0f4ff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.feed-title {
+  flex: 1;
+  font-weight: 600;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feed-same-label {
+  font-size: 0.75rem;
+  color: #666;
+  font-style: italic;
+}
+
+.change-feed-btn {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.78rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.change-feed-btn:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.feed-waiting {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Same feed checkbox */
+.same-feed-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.same-feed-checkbox input {
+  cursor: pointer;
+}
+
+/* Column title */
+.column-title {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
 /* Header */
 .app-header {
   text-align: center;

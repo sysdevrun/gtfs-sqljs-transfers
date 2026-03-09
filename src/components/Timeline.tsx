@@ -18,6 +18,7 @@ interface Connection {
 
 interface Props {
   gtfs: GtfsSqlJs;
+  departureGtfs?: GtfsSqlJs;
   date: string;
   arrivalRouteId: string;
   arrivalDirectionId: number;
@@ -37,16 +38,17 @@ function getStopIdsByName(gtfs: GtfsSqlJs, stopName: string): string[] {
 }
 
 export function Timeline({
-  gtfs, date,
+  gtfs, departureGtfs: depGtfs, date,
   arrivalRouteId, arrivalDirectionId, arrivalStopName,
   departureRouteId, departureDirectionId, departureStopName,
   goodInterval, badInterval,
   arrivalColor, departureColor,
 }: Props) {
+  const departureGtfs = depGtfs ?? gtfs;
   const { arrivals, departures, connections } = useMemo(() => {
     // Get all stop IDs matching the arrival stop name
     const arrivalStopIds = getStopIdsByName(gtfs, arrivalStopName);
-    const departureStopIds = getStopIdsByName(gtfs, departureStopName);
+    const departureStopIds = getStopIdsByName(departureGtfs, departureStopName);
 
     // Get stop times for arrivals
     const arrivalEvents: TimeEvent[] = [];
@@ -72,7 +74,7 @@ export function Timeline({
     // Get stop times for departures
     const departureEvents: TimeEvent[] = [];
     for (const stopId of departureStopIds) {
-      const stopTimes = gtfs.getStopTimes({
+      const stopTimes = departureGtfs.getStopTimes({
         routeId: departureRouteId,
         directionId: departureDirectionId,
         stopId,
@@ -122,7 +124,7 @@ export function Timeline({
       departures: uniqueDepartures,
       connections: conns,
     };
-  }, [gtfs, date, arrivalRouteId, arrivalDirectionId, arrivalStopName,
+  }, [gtfs, departureGtfs, date, arrivalRouteId, arrivalDirectionId, arrivalStopName,
       departureRouteId, departureDirectionId, departureStopName,
       goodInterval, badInterval]);
 

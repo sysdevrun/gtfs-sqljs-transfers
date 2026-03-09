@@ -1,4 +1,4 @@
-import type { ProgressInfo } from '../hooks/useGtfs';
+import type { ProgressInfo } from '../hooks/useGtfsLoader';
 
 const phaseLabels: Record<string, string> = {
   checking_cache: 'Vérification du cache...',
@@ -17,16 +17,19 @@ const phaseLabels: Record<string, string> = {
 interface Props {
   progress: ProgressInfo | null;
   error: string | null;
+  inline?: boolean;
+  onRetry?: () => void;
 }
 
-export function LoadingScreen({ progress, error }: Props) {
+export function LoadingScreen({ progress, error, inline, onRetry }: Props) {
+  const className = inline ? 'loading-inline' : 'loading-screen';
+
   if (error) {
     return (
-      <div className="loading-screen">
+      <div className={className}>
         <div className="loading-error">
-          <h2>Erreur de chargement</h2>
           <p>{error}</p>
-          <button onClick={() => window.location.reload()}>Réessayer</button>
+          <button onClick={onRetry ?? (() => window.location.reload())}>Réessayer</button>
         </div>
       </div>
     );
@@ -38,8 +41,7 @@ export function LoadingScreen({ progress, error }: Props) {
   const currentFile = progress?.currentFile;
 
   return (
-    <div className="loading-screen">
-      <h1>Correspondances Car Jaune</h1>
+    <div className={className}>
       <div className="loading-bar-container">
         <div className="loading-bar" style={{ width: `${percent}%` }} />
       </div>
