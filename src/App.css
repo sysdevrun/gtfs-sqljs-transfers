@@ -131,15 +131,23 @@
 .same-feed-checkbox {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: #555;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
   cursor: pointer;
   white-space: nowrap;
+  background: #f0f4ff;
+  border: 1.5px solid #93b4f8;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
 }
 
 .same-feed-checkbox input {
   cursor: pointer;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #3b82f6;
 }
 
 /* Column title */
