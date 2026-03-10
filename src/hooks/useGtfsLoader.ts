@@ -9,6 +9,16 @@ export interface ProgressInfo {
   message: string;
 }
 
+// Convert https URL to proxy URL to avoid CORS issues
+function getProxyUrl(httpsUrl: string): string {
+  if (!httpsUrl.startsWith('https://')) {
+    throw new Error('URL must start with https://');
+  }
+  // Remove https:// prefix
+  const withoutProtocol = httpsUrl.substring(8);
+  return `https://gtfs-proxy.sys-dev-run.re/proxy/${withoutProtocol}`;
+}
+
 export function useGtfsLoader() {
   const [gtfs, setGtfs] = useState<GtfsSqlJs | null>(null);
   const [loading, setLoading] = useState(false);
@@ -26,7 +36,7 @@ export function useGtfsLoader() {
     setGtfs(null);
 
     try {
-      const url = result.type === 'url' ? result.url : URL.createObjectURL(result.blob);
+      const url = result.type === 'url' ? getProxyUrl(result.url) : URL.createObjectURL(result.blob);
       const title = result.type === 'url' ? result.title : result.fileName;
       try {
         const instance = await GtfsSqlJs.fromZip(url, {
